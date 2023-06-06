@@ -7,7 +7,8 @@ export default async function ProductsPage() {
 
   // public API : https://meowfacts.herokuapp.com  => 새로 고침 할때마다 데이터가 변경됨.
   const res = await fetch("https://meowfacts.herokuapp.com", {
-    next: { revalidate: 3 },
+    cache: "reload",
+    next: { revalidate: 0 },
   });
   const data = await res.json();
   const factText = data.data[0];
