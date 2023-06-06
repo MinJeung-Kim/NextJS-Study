@@ -1,13 +1,14 @@
 import { getProducts } from "@/service/products";
-import Link from "next/link"; 
+import Link from "next/link";
+import styles from "./page.module.css"; 
 
-// 3초마다 revalidate.
-export const revalidate = 3;
-
-export default async function ProductsPage() {
-
-  // 서버 파일(데이터베이스)에 있는 제품의 리스트를 읽어와서 , 출력
+export default async function ProductsPage() { 
   const products = await getProducts();
+
+  // public API : https://meowfacts.herokuapp.com  => 새로 고침 할때마다 데이터가 변경됨.
+  const res = await fetch("https://meowfacts.herokuapp.com");
+  const data = await res.json();
+  const factText = data.data[0];
 
   return (
     <>
@@ -19,6 +20,7 @@ export default async function ProductsPage() {
           </li>
         ))}
       </ul>
+      <article className={styles.article}>{factText}</article>
     </>
   );
 }
