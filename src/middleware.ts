@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
     console.log("미들웨어 - 경로를 리다이렉팅함! ");
     return NextResponse.redirect(new URL("/products", request.url));
   }
-}
+} 
 
 // 특정 경로에서만 실행.
 export const config = {
